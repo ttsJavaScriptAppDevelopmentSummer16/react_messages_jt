@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './normalize.css';
 import './skeleton.css';
 import './App.css';
+
+class messageList extends Component {
+
+}
 
 class messagesApp extends Component {
 
@@ -19,6 +22,21 @@ class messagesApp extends Component {
         newMessage: null,
         editMessage: false
     }
+  }
+
+  _handleMessage = (message) => {
+    const currentUser = 'Kobe';
+    console.log({message});
+    const classes = message.user === currentUser ? 'message currentUser' : 'message';
+     if (message.user === currentUser) {
+        return (
+          <p className={classes}> Hey I'm message #. Here is my contents: {message.text} <br/><button className='button-primary'>Edit Message</button></p>
+        )
+      }else {
+        return (
+          <p className={classes}> Hey I'm message #. Here is my contents: {message.text}</p>
+        )
+      }
   }
 
    _updateMessage = (e) => {
@@ -48,24 +66,6 @@ class messagesApp extends Component {
 }
 
   render() {
-    const currentUser = 'Kobe';
-    const messages = this.state.messages.map(function (message, i) {
-      let classes = message.user === currentUser ? 'message currentUser' : 'message';
-        if (message.user === currentUser) {
-          return (
-            <p className={classes} key={i}> Hey I'm message # {i}. Here is my contents: {message.text} <br/><button className='button-primary'>Edit Message</button></p>
-          )
-        }else {
-          return (
-            <p className={classes} key={i}> Hey I'm message # {i}. Here is my contents: {message.text}</p>
-          )
-        }
-        
-    });
-
- 
-
-
 
     return (
       <div className='container'>
@@ -75,12 +75,11 @@ class messagesApp extends Component {
         <button type="submit" className='primary'>Add Message</button>
         </form>
         <p><u>Message List</u></p>
-        <div>{messages}</div>
-         {(function () {
-            if (messages.length > 3) {
-              return (<button>Show More Messages</button>)
-            }
-          })()}
+        {this.state.messages.map( (message) => {
+         return this._handleMessage(message);
+        })}
+
+         
       </div>
 
     );
