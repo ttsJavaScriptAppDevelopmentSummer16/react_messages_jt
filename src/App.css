@@ -31,3 +31,12 @@ ol li {
 .currentUser {
   color: red;
 }
+
+input[type="text"].error {
+  border: 1px solid red;
+}
+
+.button-primary {
+  padding: 0 8px;
+  font-size: 10px;
+}
